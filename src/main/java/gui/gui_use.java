@@ -467,7 +467,24 @@ public class gui_use extends JFrame implements ActionListener {
                                 StyledDocument document = msgArea.getStyledDocument();
                                 //成功 createTrade 后 进行
                                 if (createTradeSuccess) {
-
+                                    if(query_ticket_size > 0 )
+                                    {
+                                        //删除panel中的全部内容
+                                        panel.removeAll();
+                                        //向panel中加入查询窗口表头
+                                        panel.add(l_checkbox);
+                                        //msgArea区域滚动条调至最后一条消息处
+                                        msgArea.setCaretPosition(msgArea.getText().length());
+                                    }
+                                    try {
+                                        //确保panel组件具有有效的布局
+                                        panel.validate();
+                                        //重绘panel
+                                        panel.repaint();
+                                    } catch (Exception query_e) {
+                                        System.out.println(query_e.toString());
+                                    }
+                                    add_checkbox(panel);
                                     try {
                                         document.insertString(document.getLength(),
                                                 "成功购买 第 " + queryRunBeans.get(ticket).getRunId() + " 次 列车\n", null);
